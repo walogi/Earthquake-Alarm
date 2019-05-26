@@ -3,9 +3,9 @@ LiquidCrystal lcd(4,5,13,12,11,10);
 #include <Buzzer.h>
 Buzzer buzzer(3);
 #define led 2
-#define x A2
+#define x A0
 #define y A1
-#define z A0
+#define z A2
 
 int xsample=0;
 int ysample=0;
@@ -30,10 +30,7 @@ void setup() {
   lcd.setCursor(0,1);
   lcd.print("_Micro_Project_");
   delay(2000);
-  lcd.clear();
-  lcd.print("Calibrating.....");
-  lcd.setCursor(0,1);
-  lcd.print("Please wait...");
+
   pinMode(3, OUTPUT);
   pinMode(led, OUTPUT);
   digitalWrite(3, LOW);
@@ -49,12 +46,7 @@ for(int i=0;i<samples;i++)
   zsample/=samples;   
   
   delay(3000);
-  lcd.clear();
-  lcd.print("Calibrated");
-  delay(1000);
-  lcd.clear();
-  lcd.print("Device Ready");
-  delay(1000);
+
   lcd.clear();
   lcd.print(" X     Y     Z   ");
 }
@@ -78,9 +70,8 @@ void loop() {
  if(xValue < minVal || xValue > maxVal  || yValue < minVal || yValue > maxVal  || zValue < minVal || zValue > maxVal)
     { 
       lcd.setCursor(0,0);
- lcd.print("Earthquake Alert ");
-lcd.setCursor(0,1);
-lcd.print("                   ");
+ lcd.print("Earthquake ALERT");
+
       
       if(3 == LOW)
 
@@ -101,7 +92,7 @@ lcd.print("                   ");
    else
 {
 lcd.clear();
-lcd.print(" X    Y      Z ");
+lcd.print(" X     Y      Z ");
 }
     
     digitalWrite(3, LOW);   
